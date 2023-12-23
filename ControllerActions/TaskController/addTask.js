@@ -1,6 +1,7 @@
 // controllers/taskController.js
 
 const Task = require("../../Models/Task");
+const { sendEmail } = require("../../Utilities/EmailService");
 
 const addTaskAction = async (req, res) => {
   try {
@@ -14,6 +15,9 @@ const addTaskAction = async (req, res) => {
     });
 
     const savedTask = await newTask.save();
+    const subject = "New Task Added";
+    const message = ` A new task has been added into your list ${savedTask.title}`;
+    await sendEmail(req.user.email, subject, message);
 
     res.status(201).json(savedTask);
   } catch (error) {

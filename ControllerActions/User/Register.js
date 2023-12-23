@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../Models/User"); // Import the User model
 const dotenv = require("dotenv");
+const { sendEmail } = require("../../Utilities/EmailService");
 
 // dotenv.config({ path: "../../Config.env" });
 dotenv.config();
@@ -25,6 +26,12 @@ const registerUser = async (req, res) => {
 
     // Save the user to the database
     await newUser.save();
+
+    const welcomeSubject = "Welcome to My Tasks App";
+    const welcomeText =
+      "Thank you for registering on My Tasks App from Ameen_Works!";
+
+    await sendEmail(email, welcomeSubject, welcomeText);
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {

@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const userRouter = require("./Routes/UserRoutes");
 const taskRouter = require("./Routes/TaskRoutes");
+const Scheduler= require("./Utilities/CheckDeadline");
 
 const app = express();
 const port = 3001;
