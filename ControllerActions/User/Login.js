@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../../Models/User"); // Import the User model
 const dotenv = require("dotenv");
 
-dotenv.config({ path: "../../Config.env" });
+// dotenv.config({ path: "../../Config.env" });
+dotenv.config();
 const secretKey = process.env.JWT_SECRET;
 
 const loginUser = async (req, res) => {
@@ -35,14 +36,12 @@ const loginUser = async (req, res) => {
       }
     );
 
-    res
-      .status(200)
-      .json({
-        token,
-        expiresIn: 3600,
-        userId: user._id,
-        username: user.username,
-      });
+    res.status(200).json({
+      token,
+      expiresIn: 3600,
+      userId: user._id,
+      username: user.username,
+    });
   } catch (error) {
     console.error("Login failed:", error);
     res.status(500).json({ message: "Internal server error" });

@@ -13,7 +13,8 @@ const taskRouter = require("./Routes/TaskRoutes");
 const app = express();
 const port = 3001;
 
-dotenv.config({ path: "./Config.env" });
+// dotenv.config({ path: "./Config.env" });
+dotenv.config();
 const dbUrl = process.env.DB_URL;
 
 app.use(express.json());
